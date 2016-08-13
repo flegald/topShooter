@@ -43,7 +43,10 @@ var assetsObj = {
 		}
 	},
 	"audio": {
-		"shoot": ['laser.wav']
+		"shoot": ['laser.wav'],
+		"explosion": ['explosion.wav'],
+		"introSong": ['short.wav'],
+		"gameSong": ['long.wav']
 	}
 }
 Crafty.load(assetsObj)
@@ -51,6 +54,7 @@ Crafty.load(assetsObj)
 
 //Define Splash Scene
 Crafty.defineScene('intro', function intro(){
+	Crafty.audio.play('introSong', -1)
 	Crafty.e("2D, DOM, Text, KeyBoard")
 		.attr({ x: 450, y: 200, w:500 })
 		.textColor('red')
@@ -59,6 +63,7 @@ Crafty.defineScene('intro', function intro(){
 		.bind("KeyDown", function(e){
 			if(e.key == Crafty.keys['ENTER']){
 				// Load Gameplay Scene
+				Crafty.audio.stop('introSong')
 				Crafty.enterScene('gameplay')
 				
 			}
@@ -71,6 +76,7 @@ Crafty.enterScene('intro')
 
 // Define Win Scene
 Crafty.defineScene('win', function(){
+	Crafty.audio.play('introSong', -1)
 	Crafty.e("2D, DOM, Text, KeyBoard")
 		.attr({ x: 300, y: 200, w:500 })
 		.textColor('red')
@@ -79,6 +85,7 @@ Crafty.defineScene('win', function(){
 		.bind("KeyDown", function(e){
 			if(e.key == Crafty.keys['ENTER']){
 				// Load Gameplay Scene
+				Crafty.audio.stop('introSong')
 				Crafty.enterScene('gameplay')
 				
 			}
@@ -87,6 +94,7 @@ Crafty.defineScene('win', function(){
 
 // Define Lose Scene
 Crafty.defineScene('lose', function(){
+	Crafty.audio.play('introSong', -1)
 	Crafty.e("2D, DOM, Text, KeyBoard")
 		.attr({ x: 300, y: 200, w:500 })
 		.textColor('red')
@@ -95,6 +103,7 @@ Crafty.defineScene('lose', function(){
 		.bind("KeyDown", function(e){
 			if(e.key == Crafty.keys['ENTER']){
 				// Load Gameplay Scene
+				Crafty.audio.stop('introSong')
 				Crafty.enterScene('gameplay')
 				
 			}
@@ -104,6 +113,8 @@ Crafty.defineScene('lose', function(){
 
 // Define Gameplay Scene
 Crafty.defineScene('gameplay', function(){
+
+	Crafty.audio.play('gameSong', -1)
 	// Player Object
 	player = Crafty.e('Player, 2D, Canvas, Twoway, Collision, ship')
 		.attr({x: 20, y: 450, w:50, h: 50})
@@ -147,8 +158,10 @@ Crafty.defineScene('gameplay', function(){
 							])
 							.animate('exploding', -1)
 							enemy.destroy()
+							Crafty.audio.play('explosion')
 							setTimeout(function(){
 								explosion.destroy()
+								Crafty.audio.stop('gameSong')
 								Crafty.enterScene('win')
 								
 							}, 1000
@@ -179,7 +192,6 @@ Crafty.defineScene('gameplay', function(){
 		.delay(function(){
 			var bulletX = enemy.x + 25;
 			var bulletY = enemy.y + 25;
-			
 			// Enemy Bullet Object
 			enemyBullet = Crafty.e("Bullet, 2D, Canvas, Collision, badLaser")
 				.attr({x:bulletX, y:bulletY, w:6, h:6})
@@ -200,7 +212,9 @@ Crafty.defineScene('gameplay', function(){
 							[3, 0], [3, 1]
 						])
 						.animate('exploding', -1)
+						Crafty.audio.play('explosion')
 						player.destroy()
+						Crafty.audio.stop('gameSong')
 						setTimeout(function(){
 							explosion.destroy()
 							enemyBullet.destroy()
