@@ -1,0 +1,9 @@
+#game {
+	background-image: url("space.jpg");
+	border: 2px solid black;
+	width: 1000px;
+	height: 550px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
