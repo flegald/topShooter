@@ -4,21 +4,21 @@ Crafty.init(1000,550, document.getElementById('game'));
 // Load Sprites
 var assetsObj = {
 	"sprites": {
-		"spacesprite.png": {
+		"sprites/spacesprite.png": {
 			tile: 137,
 			tileh: 183,
 			map: {
 				ship: [0, 0]
 			}
 		},
-		"alien1.png": {
+		"sprites/alien1.png": {
 			tile: 166,
 			tileh: 315,
 			map: {
 				enemyShip: [0, 0]
 			}
 		},
-		"explosion3.png": {
+		"sprites/explosion3.png": {
 			tile: 128,
 			tileh: 128,
 			map: {
@@ -27,14 +27,14 @@ var assetsObj = {
 
 			}
 		},
-		"goodlaser.png": {
+		"sprites/goodlaser.png": {
 			tile: 74,
 			tileh: 290,
 			map: {
 				goodLaser: [0,0]
 			}
 		},
-		"badlaser.png": {
+		"sprites/badlaser.png": {
 			tile: 74,
 			tileh: 290,
 			map: {
@@ -43,10 +43,10 @@ var assetsObj = {
 		}
 	},
 	"audio": {
-		"shoot": ['laser.wav'],
-		"explosion": ['explosion.wav'],
-		"introSong": ['short.wav'],
-		"gameSong": ['long.wav']
+		"shoot": ['sounds/laser.wav'],
+		"explosion": ['sounds/explosion.wav'],
+		"introSong": ['sounds/short.wav'],
+		"gameSong": ['sounds/long.wav']
 	}
 }
 Crafty.load(assetsObj)
